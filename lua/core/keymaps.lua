@@ -9,13 +9,20 @@ k("", "<Space>", "<Nop>", o)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+k("i", "<C-h>", "<Left>", o)
+k("i", "<C-j>", "<Down>", o)
+k("i", "<C-k>", "<Up>", o)
+k("i", "<C-l>", "<Right>", o)
+
+
 k("n", "<C-h>", "<C-w>h", o)
 k("n", "<C-j>", "<C-w>j", o)
 k("n", "<C-k>", "<C-w>k", o)
 k("n", "<C-l>", "<C-w>l", o)
 
 -- 
-k("n", "<leader>e", ":Lex 20<CR>", o)
+k("n", "<leader>e", ":NvimTreeFocus<CR>", o)
+k("n", "<leader>n", ":NvimTreeToggle<CR>", o)
 
 k("n", "<M-Up>", ":resize +2<CR>", o)
 k("n", "<M-Down>", ":resize -2<CR>", o)
@@ -40,3 +47,8 @@ k("i", "<M-k>", "<Esc>:m .-2<CR>==gi", o)
 
 -- Preven yanking selection when pasting
 k("v", "p", '"_dP', o)
+
+
+k('n', '<leader>ff', ":Telescope find_files <CR>", o)
+k('n', '<leader>fg', ":Telescope live_grep <CR>", o)
+k('n', '<leader>fb', ":Telescope buffers <CR>", o)
