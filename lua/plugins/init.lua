@@ -1,17 +1,29 @@
 local plugins = {
   { "nvim-lua/plenary.nvim" },
 
+  { "folke/which-key.nvim" },
+
+  { "nvim-tree/nvim-web-devicons" },
+
   {
     "catppuccin/nvim",
     name = "catppuccin",
+    -- config = function()
+    --   vim.cmd [[colorscheme catppuccin-mocha]]
+    -- end
+  },
+
+  {
+    "navarasu/onedark.nvim",
     config = function()
-      vim.cmd [[colorscheme catppuccin-mocha]]
+      require('onedark').setup {
+        style = 'cool'
+      }
+      require('onedark').load()
     end
   },
 
-  { "folke/which-key.nvim" },
-
-  { 
+  {
     "lukas-reineke/indent-blankline.nvim",
     opts = {
       filetype_exclude = {
@@ -34,7 +46,7 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     opts ={
-      ensure_installed = { 
+      ensure_installed = {
         "lua",
         "javascript",
         "typescript",
@@ -55,13 +67,18 @@ local plugins = {
 
   {
     'numToStr/Comment.nvim',
-    config = function(_, opts)
-        require('Comment').setup()
+    config = function()
+      require('Comment').setup()
     end
   },
 
   {
     "nvim-lualine/lualine.nvim",
+    opts = {
+      options = {
+        disabled_filetypes = { "NvimTree" }
+      }
+    },
     config = function(_, opts)
       require("lualine").setup(opts)
     end,
@@ -101,11 +118,12 @@ local plugins = {
     end
   }, 
 
-
   {
     'akinsho/bufferline.nvim', 
     version = "*",
-    dependencies = 'nvim-tree/nvim-web-devicons',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
     opts = {
       options = {
         offsets = {
@@ -115,13 +133,6 @@ local plugins = {
     },
     config = function(_, opts)
       require("bufferline").setup(opts)
-    end 
-  },
-
-  {
-    "windwp/nvim-autopairs",
-    config  = function(_, opts)
-      require("nvim-autopairs").setup(opts)
     end 
   },
 
@@ -139,6 +150,47 @@ local plugins = {
     'lewis6991/gitsigns.nvim',
     config = function(_, opts)
       require('gitsigns').setup(opts)
+    end
+  },
+
+  {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
+    dependencies = {
+      -- LSP Support
+      { 'neovim/nvim-lspconfig' },
+      { 'williamboman/mason.nvim', build = ":MasonUpdate" },
+      { 'williamboman/mason-lspconfig.nvim' },
+
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},
+      {'hrsh7th/cmp-nvim-lsp'},
+      {'L3MON4D3/LuaSnip'},
+    },
+    config = function()
+      local lsp = require('lsp-zero').preset({})
+      lsp.ensure_installed({
+        'tsserver'
+      })
+      lsp.on_attach(function(_, bufnr)
+        lsp.default_keymaps({ buffer = bufnr })
+      end)
+
+      require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+
+      lsp.setup()
+
+      local cmp = require('cmp')
+      local cmp_select = {behavior = cmp.SelectBehavior.Select}
+      cmp.setup({
+        mapping = {
+          -- `Enter` key to confirm completion
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+          ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+          ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+          ['<S-Space>'] = cmp.mapping.complete(),
+        }
+      })
     end
   }
 }
