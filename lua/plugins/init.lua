@@ -2,9 +2,6 @@ local plugins = {
   { "nvim-lua/plenary.nvim" },
 
   {
-    "lunarvim/darkplus.nvim",
-  },
-  {
     "catppuccin/nvim",
     name = "catppuccin",
     config = function()
@@ -36,9 +33,21 @@ local plugins = {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    opts = function()
-      return require "plugins.treesitter"
-    end,
+    opts ={
+      ensure_installed = { 
+        "lua",
+        "javascript",
+        "typescript",
+        "tsx",
+        "rust"
+      },
+      highlight = {
+        enable = true,
+      },
+      indent = {
+        enable = true,
+      }
+    } ,
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
     end,
@@ -97,6 +106,13 @@ local plugins = {
     'akinsho/bufferline.nvim', 
     version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons',
+    opts = {
+      options = {
+        offsets = {
+          { filetype = "NvimTree", text = "" }
+        }
+      }
+    },
     config = function(_, opts)
       require("bufferline").setup(opts)
     end 
@@ -107,6 +123,23 @@ local plugins = {
     config  = function(_, opts)
       require("nvim-autopairs").setup(opts)
     end 
+  },
+
+  {
+    "max397574/better-escape.nvim",
+    opts = {
+      mapping = { "jk" }
+    },
+    config = function(_, opts)
+      require("better_escape").setup(opts)
+    end,
+  },
+
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function(_, opts)
+      require('gitsigns').setup(opts)
+    end
   }
 }
 
