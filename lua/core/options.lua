@@ -1,17 +1,11 @@
-local options = {
-  wrap = false,
-  number = true,
+vim.opt.wrap = false
+vim.opt.number = true
 
-  -- Indenting
-  expandtab = true,
-  shiftwidth = 2,
-  smartindent = true,
-  tabstop = 2,
-  softtabstop = 2,
-}
-
-for k, v in pairs(options) do
-    vim.opt[k] = v
-end
-
+-- Indenting
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.smartindent = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.scrolloff = 16
 
