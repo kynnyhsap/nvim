@@ -51,9 +51,9 @@ k("i", "<M-k>", "<Esc>:m .-2<CR>==gi", o)
 k("v", "p", '"_dP', o)
 
 -- fuzzy find 
--- k('n', '<leader>ff', ":Telescope find_files <CR>", o)
--- k('n', '<leader>fg', ":Telescope live_grep <CR>", o)
--- k('n', '<leader>fb', ":Telescope buffers <CR>", o)
+k('n', '<leader>ff', ":Telescope find_files <CR>", o)
+k('n', '<leader>fg', ":Telescope live_grep <CR>", o)
+k('n', '<leader>fb', ":Telescope buffers <CR>", o)
 
 
 --
@@ -107,13 +107,14 @@ require("lazy").setup({
 
   "tpope/vim-sleuth",
 
-  -- {
-  --   "nvim-telescope/telescope.nvim",
-  --   tag = "0.1.1",
-  --   config = function()
-  --     require("telescope").setup()
-  --   end,
-  -- },
+  {
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8",
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require("telescope").setup()
+    end,
+  },
 }, {})
 
 
