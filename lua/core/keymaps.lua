@@ -16,30 +16,17 @@ k("i", "<C-l>", "<Right>", o)
 -- switch between buffers
 k("n", "<TAB>", ":bnext<CR>", o)
 k("n", "<S-TAB>", ":bprev<CR>", o)
-
 -- close buffer 
 k("n", "<leader>bd", ":bd<CR>", o)
 
--- better navigation between windows
--- k("n", "<C-h>", "<C-w>h", o)
--- k("n", "<C-j>", "<C-w>j", o)
--- k("n", "<C-k>", "<C-w>k", o)
--- k("n", "<C-l>", "<C-w>l", o)
+-- toggle Exploer Tree
+k("n", "<leader>e", ":Ex<CR>", o)
 
--- focus and toggel nvimtree 
-k("n", "<leader>e", ":NvimTreeFocus<CR>", o)
-k("n", "<leader>n", ":NvimTreeToggle<CR>", o)
-
+-- lsp staff
 k("n", "<leader>ll", ":lua vim.lsp.buf.format()<CR>", o)
 k("n", "<leader>lr", ":lua vim.lsp.buf.rename()<CR>", o)
 k("n", "gd", ":lua vim.lsp.buf.definition()<CR>", o)
 k("n", "gD", ":lua vim.lsp.buf.declaration()<CR>", o)
-
--- resize windows
-k("n", "<M-Up>", ":resize +2<CR>", o)
-k("n", "<M-Down>", ":resize -2<CR>", o)
-k("n", "<M-Left>", ":vertical resize -2<CR>", o)
-k("n", "<M-Right>", ":vertical resize +2<CR>", o)
 
 -- move line up and down
 k("n", "<M-j>", ":m+1<CR>==", o)
@@ -53,7 +40,7 @@ k("i", "<M-k>", "<Esc>:m .-2<CR>==gi", o)
 k("v", "p", '"_dP', o)
 
 -- fuzzy find 
-k('n', '<leader>ff', ":Telescope find_files <CR>", o)
-k('n', '<leader>fg', ":Telescope live_grep <CR>", o)
-k('n', '<leader>fb', ":Telescope buffers <CR>", o)
+-- k('n', '<leader>ff', ":Telescope find_files <CR>", o)
+-- k('n', '<leader>fg', ":Telescope live_grep <CR>", o)
+-- k('n', '<leader>fb', ":Telescope buffers <CR>", o)
 
